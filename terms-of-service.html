@@ -3,67 +3,164 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Terms of Service for YouTube Video Uploader - Read our terms and conditions">
     <title>Terms of Service - YouTube Video Uploader</title>
     <link rel="icon" type="image/png" href="icon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-        h1, h2 {
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: #f8f9fa;
             color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            color: #ff0000;
+            margin-bottom: 0.5rem;
+        }
+
+        .last-updated {
+            color: #666;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        h2 {
+            color: #333;
+            font-size: 1.5rem;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #f0f0f0;
+        }
+
+        p {
+            margin-bottom: 1rem;
+        }
+
+        ul {
+            margin-bottom: 1rem;
+            padding-left: 2rem;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+        }
+
+        a {
+            color: #ff0000;
+            text-decoration: none;
+            transition: background 0.3s ease;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .back-button {
+            display: inline-block;
+            background: #ff0000;
+            color: white;
+            text-decoration: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 30px;
+            margin-top: 2rem;
+            transition: background 0.3s ease;
+        }
+
+        .back-button:hover {
+            background: #cc0000;
+            text-decoration: none;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                margin: 1rem;
+                padding: 1.5rem;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            h2 {
+                font-size: 1.3rem;
+            }
         }
     </style>
 </head>
 <body>
-    <h1>Terms of Service</h1>
-    <p>Last updated: April 24, 2025</p>
+    <div class="container">
+        <div class="header">
+            <h1>Terms of Service</h1>
+            <p class="last-updated">Last updated: April 24, 2025</p>
+        </div>
 
-    <h2>1. Acceptance of Terms</h2>
-    <p>By accessing and using the YouTube Video Uploader ("Service"), you agree to be bound by these Terms of Service and comply with all applicable laws and regulations.</p>
+        <h2>1. Acceptance of Terms</h2>
+        <p>By accessing and using the YouTube Video Uploader ("Service"), you agree to be bound by these Terms of Service and comply with all applicable laws and regulations.</p>
 
-    <h2>2. Service Description</h2>
-    <p>The Service allows users to upload videos directly to YouTube using their Google account credentials through the YouTube Data API v3.</p>
+        <h2>2. Service Description</h2>
+        <p>The Service allows users to upload videos directly to YouTube using their Google account credentials through the YouTube Data API v3.</p>
 
-    <h2>3. User Responsibilities</h2>
-    <p>You agree to:</p>
-    <ul>
-        <li>Provide accurate information when using the Service</li>
-        <li>Comply with YouTube's Terms of Service and Community Guidelines</li>
-        <li>Only upload content for which you have necessary rights and permissions</li>
-        <li>Not upload any illegal, harmful, or prohibited content</li>
-        <li>Not attempt to circumvent any security measures or access restrictions</li>
-    </ul>
+        <h2>3. User Responsibilities</h2>
+        <p>You agree to:</p>
+        <ul>
+            <li>Provide accurate information when using the Service</li>
+            <li>Comply with YouTube's Terms of Service and Community Guidelines</li>
+            <li>Only upload content for which you have necessary rights and permissions</li>
+            <li>Not upload any illegal, harmful, or prohibited content</li>
+            <li>Not attempt to circumvent any security measures or access restrictions</li>
+        </ul>
 
-    <h2>4. Google API Services</h2>
-    <p>Our Service uses Google API Services. By using our Service, you also agree to:</p>
-    <ul>
-        <li>Google's Terms of Service (<a href="https://policies.google.com/terms" target="_blank">https://policies.google.com/terms</a>)</li>
-        <li>Google's Privacy Policy (<a href="https://policies.google.com/privacy" target="_blank">https://policies.google.com/privacy</a>)</li>
-        <li>Google's API Services User Data Policy (<a href="https://developers.google.com/terms/api-services-user-data-policy" target="_blank">https://developers.google.com/terms/api-services-user-data-policy</a>)</li>
-    </ul>
+        <h2>4. Google API Services</h2>
+        <p>Our Service uses Google API Services. By using our Service, you also agree to:</p>
+        <ul>
+            <li><a href="https://policies.google.com/terms" target="_blank">Google's Terms of Service</a></li>
+            <li><a href="https://policies.google.com/privacy" target="_blank">Google's Privacy Policy</a></li>
+            <li><a href="https://developers.google.com/terms/api-services-user-data-policy" target="_blank">Google's API Services User Data Policy</a></li>
+        </ul>
 
-    <h2>5. Intellectual Property</h2>
-    <p>You retain all rights to your content. By using our Service, you grant us the necessary rights to process and transmit your content to YouTube.</p>
+        <h2>5. Intellectual Property</h2>
+        <p>You retain all rights to your content. By using our Service, you grant us the necessary rights to process and transmit your content to YouTube.</p>
 
-    <h2>6. Disclaimer of Warranties</h2>
-    <p>The Service is provided "as is" without any warranties, express or implied. We do not guarantee uninterrupted or error-free service.</p>
+        <h2>6. Disclaimer of Warranties</h2>
+        <p>The Service is provided "as is" without any warranties, express or implied. We do not guarantee uninterrupted or error-free service.</p>
 
-    <h2>7. Limitation of Liability</h2>
-    <p>We shall not be liable for any indirect, incidental, special, consequential, or punitive damages resulting from your use of the Service.</p>
+        <h2>7. Limitation of Liability</h2>
+        <p>We shall not be liable for any indirect, incidental, special, consequential, or punitive damages resulting from your use of the Service.</p>
 
-    <h2>8. Changes to Terms</h2>
-    <p>We reserve the right to modify these Terms at any time. Continued use of the Service after changes constitutes acceptance of the new Terms.</p>
+        <h2>8. Changes to Terms</h2>
+        <p>We reserve the right to modify these Terms at any time. Continued use of the Service after changes constitutes acceptance of the new Terms.</p>
 
-    <h2>9. Termination</h2>
-    <p>We reserve the right to terminate or suspend access to our Service immediately, without prior notice, for any reason whatsoever.</p>
+        <h2>9. Termination</h2>
+        <p>We reserve the right to terminate or suspend access to our Service immediately, without prior notice, for any reason whatsoever.</p>
 
-    <h2>10. Contact Information</h2>
-    <p>For any questions about these Terms, please contact us.</p>
+        <h2>10. Contact Information</h2>
+        <p>For any questions about these Terms, please contact us.</p>
 
-    <p><a href="index.html">Back to Upload Page</a></p>
+        <a href="index.html" class="back-button">Back to Upload Page</a>
+    </div>
 </body>
 </html>

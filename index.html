@@ -1,74 +1,203 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>YouTube Uploader</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Easy and secure YouTube video uploader - Upload your videos directly to YouTube">
+  <meta name="keywords" content="YouTube uploader, video upload, YouTube API">
+  <title>YouTube Video Uploader - Upload Videos Easily</title>
   <link rel="icon" type="image/png" href="icon.png">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
   <script src="https://accounts.google.com/gsi/client" async defer></script>
   <style>
-    .container {
-      max-width: 600px;
-      margin: 0 auto;
-      padding: 20px;
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
+
+    body {
+      font-family: 'Roboto', sans-serif;
+      background: #f8f9fa;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .header h1 {
+      font-size: 2.5rem;
+      color: #ff0000;
+      margin-bottom: 0.5rem;
+    }
+
+    .header p {
+      color: #666;
+    }
+
+    #authorize-btn {
+      background: #ff0000;
+      color: white;
+      border: none;
+      padding: 1rem 2rem;
+      border-radius: 30px;
+      font-size: 1.1rem;
+      cursor: pointer;
+      width: 100%;
+      max-width: 300px;
+      margin: 0 auto;
+      display: block;
+      transition: background 0.3s ease;
+    }
+
+    #authorize-btn:hover {
+      background: #cc0000;
+    }
+
     .upload-section {
-      margin: 20px 0;
+      background: white;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      margin-top: 2rem;
       display: none;
     }
-    #progress-bar {
-      width: 100%;
-      height: 20px;
-    }
+
     .input-group {
-      margin: 10px 0;
+      margin-bottom: 1.5rem;
     }
+
     .input-group label {
       display: block;
-      margin-bottom: 5px;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+      color: #444;
     }
-    .input-group input, .input-group textarea {
+
+    .input-group input[type="text"],
+    .input-group textarea,
+    .input-group select {
       width: 100%;
-      padding: 5px;
+      padding: 0.8rem;
+      border: 2px solid #e1e1e1;
+      border-radius: 8px;
+      font-size: 1rem;
+      transition: border-color 0.3s ease;
     }
-    footer {
-      margin-top: 40px;
-      padding-top: 20px;
-      border-top: 1px solid #ddd;
+
+    .input-group input[type="text"]:focus,
+    .input-group textarea:focus,
+    .input-group select:focus {
+      outline: none;
+      border-color: #ff0000;
+    }
+
+    .input-group input[type="file"] {
+      width: 100%;
+      padding: 0.8rem;
+      background: #f8f9fa;
+      border: 2px dashed #e1e1e1;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    #upload-btn {
+      background: #ff0000;
+      color: white;
+      border: none;
+      padding: 1rem;
+      border-radius: 8px;
+      font-size: 1.1rem;
+      cursor: pointer;
+      width: 100%;
+      transition: background 0.3s ease;
+    }
+
+    #upload-btn:hover {
+      background: #cc0000;
+    }
+
+    #progress-bar {
+      width: 100%;
+      height: 8px;
+      margin: 1rem 0;
+      border-radius: 4px;
+    }
+
+    #status {
       text-align: center;
-    }
-    footer a {
-      margin: 0 10px;
+      margin-top: 1rem;
       color: #666;
-      text-decoration: none;
     }
+
+    footer {
+      text-align: center;
+      padding: 2rem 0;
+      margin-top: 3rem;
+      border-top: 1px solid #e1e1e1;
+    }
+
+    footer a {
+      color: #ff0000;
+      text-decoration: none;
+      margin: 0 10px;
+    }
+
     footer a:hover {
       text-decoration: underline;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        margin: 1rem auto;
+      }
+
+      .header h1 {
+        font-size: 2rem;
+      }
+
+      .upload-section {
+        padding: 1.5rem;
+      }
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <h1>Upload to YouTube</h1>
-    <button id="authorize-btn">Authorize with YouTube</button>
+    <div class="header">
+      <h1>YouTube Video Uploader</h1>
+      <p>Upload your videos directly to YouTube with just a few clicks</p>
+    </div>
+
+    <button id="authorize-btn">Sign in with Google</button>
     
     <div id="upload-section" class="upload-section">
       <div class="input-group">
-        <label for="file">Select Video File:</label>
+        <label for="file">Choose Video File</label>
         <input type="file" id="file" accept="video/*" required>
       </div>
       
       <div class="input-group">
-        <label for="title">Video Title:</label>
-        <input type="text" id="title" required>
+        <label for="title">Video Title</label>
+        <input type="text" id="title" required placeholder="Enter a title for your video">
       </div>
       
       <div class="input-group">
-        <label for="description">Description:</label>
-        <textarea id="description" rows="4"></textarea>
+        <label for="description">Description</label>
+        <textarea id="description" rows="4" placeholder="Enter a description for your video"></textarea>
       </div>
       
       <div class="input-group">
-        <label for="privacy">Privacy Setting:</label>
+        <label for="privacy">Privacy Setting</label>
         <select id="privacy">
           <option value="private">Private</option>
           <option value="unlisted">Unlisted</option>
