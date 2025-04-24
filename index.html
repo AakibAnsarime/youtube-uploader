@@ -3,6 +3,7 @@
 <head>
   <meta charset="utf-8">
   <title>YouTube Uploader</title>
+  <link rel="icon" type="image/png" href="icon.png">
   <script src="https://accounts.google.com/gsi/client" async defer></script>
   <style>
     .container {
@@ -28,6 +29,20 @@
     .input-group input, .input-group textarea {
       width: 100%;
       padding: 5px;
+    }
+    footer {
+      margin-top: 40px;
+      padding-top: 20px;
+      border-top: 1px solid #ddd;
+      text-align: center;
+    }
+    footer a {
+      margin: 0 10px;
+      color: #666;
+      text-decoration: none;
+    }
+    footer a:hover {
+      text-decoration: underline;
     }
   </style>
 </head>
@@ -66,6 +81,10 @@
       <p id="status"></p>
     </div>
   </div>
+
+  <footer>
+    <p>By using this service, you agree to our <a href="terms-of-service.html">Terms of Service</a> and <a href="privacy-policy.html">Privacy Policy</a></p>
+  </footer>
 
   <script>
     const CLIENT_ID = '433165446409-brdd4h5ejrbc6ti2dfdp61gbgpqv0jp7.apps.googleusercontent.com';
