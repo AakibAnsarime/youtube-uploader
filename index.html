@@ -169,16 +169,103 @@
         padding: 1.5rem;
       }
     }
+
+    .contact-info {
+      margin-top: 2rem;
+      padding: 1rem;
+      background: #f8f9fa;
+      border-radius: 8px;
+      text-align: center;
+    }
+
+    .google-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #fff;
+      color: #757575;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      padding: 0;
+      height: 40px;
+      width: 100%;
+      max-width: 240px;
+      margin: 2rem auto;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .google-btn:hover {
+      background-color: #f8f8f8;
+    }
+
+    .google-btn img {
+      width: 18px;
+      height: 18px;
+      margin-right: 8px;
+    }
+
+    .google-btn span {
+      padding: 10px;
+      font-family: 'Roboto', sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .footer-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .contact-section {
+      margin-top: 2rem;
+      text-align: center;
+    }
+
+    .contact-section h3 {
+      color: #333;
+      margin-bottom: 1rem;
+    }
+
+    .contact-section a {
+      color: #ff0000;
+      text-decoration: none;
+    }
+
+    .contact-section a:hover {
+      text-decoration: underline;
+    }
   </style>
 </head>
 <body>
   <div class="container">
     <div class="header">
       <h1>YouTube Video Uploader</h1>
-      <p>Upload your videos directly to YouTube with just a few clicks</p>
+      <p>Securely upload videos to your YouTube channel</p>
     </div>
 
-    <button id="authorize-btn">Sign in with Google</button>
+    <div class="app-info" style="margin-bottom: 2rem; padding: 1rem; background: #f8f9fa; border-radius: 8px;">
+      <h2 style="color: #333; margin-bottom: 1rem;">About This App</h2>
+      <p>This application allows you to upload videos directly to your YouTube channel using Google's official YouTube API. We prioritize your security and privacy - all uploads are processed directly between your browser and YouTube's servers.</p>
+      
+      <h3 style="color: #333; margin: 1rem 0;">How to Use:</h3>
+      <ol style="margin-left: 1.5rem;">
+        <li>Sign in with your Google account</li>
+        <li>Select your video file</li>
+        <li>Add title and description</li>
+        <li>Choose privacy setting</li>
+        <li>Click upload</li>
+      </ol>
+
+      <p style="margin-top: 1rem;">We only request the minimum required permissions to upload videos. Read our <a href="privacy-policy.html">Privacy Policy</a> for details.</p>
+    </div>
+
+    <button id="authorize-btn" class="google-btn">
+      <img src="https://www.google.com/favicon.ico" alt="Google Logo">
+      <span>Sign in with Google</span>
+    </button>
     
     <div id="upload-section" class="upload-section">
       <div class="input-group">
@@ -209,10 +296,20 @@
       <progress id="progress-bar" value="0" max="100"></progress>
       <p id="status"></p>
     </div>
+
+    <div class="contact-section">
+      <h3>Need Help?</h3>
+      <p>If you have any questions or need assistance, please contact us at:</p>
+      <a href="mailto:aakiba6619@gmail.com">aakiba6619@gmail.com</a>
+    </div>
   </div>
 
   <footer>
-    <p>By using this service, you agree to our <a href="terms-of-service.html">Terms of Service</a> and <a href="privacy-policy.html">Privacy Policy</a></p>
+    <div class="footer-content">
+      <p>By using this service, you agree to our <a href="terms-of-service.html">Terms of Service</a> and <a href="privacy-policy.html">Privacy Policy</a></p>
+      <p>This application uses YouTube API Services and complies with <a href="https://developers.google.com/youtube/terms/api-services-terms-of-service" target="_blank">YouTube Terms of Service</a></p>
+      <p>Contact: <a href="mailto:aakiba6619@gmail.com">aakiba6619@gmail.com</a></p>
+    </div>
   </footer>
 
   <script>
