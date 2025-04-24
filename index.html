@@ -326,12 +326,13 @@
 
     function handleAuthClick() {
       if (accessToken) {
-        // Token exists, proceed with upload
         uploadSection.style.display = 'block';
         authorizeBtn.style.display = 'none';
       } else {
-        // Request token
-        tokenClient.requestAccessToken();
+        tokenClient.requestAccessToken({
+          prompt: 'consent',
+          state: 'try_sample_request'
+        });
       }
     }
 
@@ -340,17 +341,35 @@
         accessToken = response.access_token;
         authorizeBtn.style.display = 'none';
         uploadSection.style.display = 'block';
+        statusText.textContent = 'Successfully authenticated';
+      } else {
+        console.error('Token response error:', response);
+        statusText.textContent = 'Authentication failed. Please try again.';
       }
     }
 
-    window.onload = () => {
-      tokenClient = google.accounts.oauth2.initTokenClient({
-        client_id: CLIENT_ID,
-        scope: SCOPES,
-        callback: handleTokenResponse,
-      });
+    function handleAuthError(error) {
+      console.error('Auth error:', error);
+      statusText.textContent = `Authentication error: ${error.message || 'Unknown error'}`;
+    }
 
-      authorizeBtn.onclick = handleAuthClick;
+    window.onload = () => {
+      try {
+        tokenClient = google.accounts.oauth2.initTokenClient({
+          client_id: CLIENT_ID,
+          scope: SCOPES,
+          callback: handleTokenResponse,
+          error_callback: handleAuthError,
+          state: 'try_sample_request',
+          include_granted_scopes: true,
+          enable_serial_consent: true
+        });
+
+        authorizeBtn.onclick = handleAuthClick;
+      } catch (error) {
+        console.error('Init error:', error);
+        statusText.textContent = 'Failed to initialize authentication. Please check your configuration.';
+      }
     };
 
     uploadBtn.onclick = async () => {
