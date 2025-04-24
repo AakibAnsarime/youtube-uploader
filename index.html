@@ -317,27 +317,40 @@
     const SCOPES = 'https://www.googleapis.com/auth/youtube.upload';
 
     let tokenClient;
+    let accessToken = null;
     const authorizeBtn = document.getElementById('authorize-btn');
     const uploadSection = document.getElementById('upload-section');
     const uploadBtn = document.getElementById('upload-btn');
     const progressBar = document.getElementById('progress-bar');
     const statusText = document.getElementById('status');
 
-    authorizeBtn.onclick = () => {
-      tokenClient.requestAccessToken({scope: SCOPES});
-    };
+    function handleAuthClick() {
+      if (accessToken) {
+        // Token exists, proceed with upload
+        uploadSection.style.display = 'block';
+        authorizeBtn.style.display = 'none';
+      } else {
+        // Request token
+        tokenClient.requestAccessToken();
+      }
+    }
+
+    function handleTokenResponse(response) {
+      if (response && response.access_token) {
+        accessToken = response.access_token;
+        authorizeBtn.style.display = 'none';
+        uploadSection.style.display = 'block';
+      }
+    }
 
     window.onload = () => {
       tokenClient = google.accounts.oauth2.initTokenClient({
         client_id: CLIENT_ID,
         scope: SCOPES,
-        callback: (tokenResponse) => {
-          if (tokenResponse && tokenResponse.access_token) {
-            authorizeBtn.style.display = 'none';
-            uploadSection.style.display = 'block';
-          }
-        },
+        callback: handleTokenResponse,
       });
+
+      authorizeBtn.onclick = handleAuthClick;
     };
 
     uploadBtn.onclick = async () => {
@@ -345,6 +358,11 @@
       const titleInput = document.getElementById('title');
       const descriptionInput = document.getElementById('description');
       const privacySelect = document.getElementById('privacy');
+
+      if (!accessToken) {
+        statusText.textContent = 'Please authorize with Google first';
+        return;
+      }
 
       if (!fileInput.files[0]) {
         alert('Please select a video file');
@@ -370,12 +388,13 @@
 
       try {
         statusText.textContent = 'Initiating upload...';
+        uploadBtn.disabled = true;
         
         // Get the upload URL
         const response = await fetch('https://www.googleapis.com/upload/youtube/v3/videos?uploadType=resumable&part=snippet,status', {
           method: 'POST',
           headers: {
-            'Authorization': `Bearer ${tokenClient.credentials.access_token}`,
+            'Authorization': `Bearer ${accessToken}`,
             'Content-Type': 'application/json',
             'X-Upload-Content-Length': file.size,
             'X-Upload-Content-Type': file.type,
@@ -384,13 +403,17 @@
         });
 
         if (!response.ok) {
-          throw new Error('Failed to initiate upload');
+          throw new Error(`Failed to initiate upload: ${response.status} ${response.statusText}`);
         }
 
         const uploadUrl = response.headers.get('Location');
-        
+        if (!uploadUrl) {
+          throw new Error('No upload URL received');
+        }
+
         // Upload the file
         statusText.textContent = 'Uploading video...';
+        
         const uploadResponse = await fetch(uploadUrl, {
           method: 'PUT',
           headers: {
@@ -400,7 +423,7 @@
         });
 
         if (!uploadResponse.ok) {
-          throw new Error('Upload failed');
+          throw new Error(`Upload failed: ${uploadResponse.status} ${uploadResponse.statusText}`);
         }
 
         const result = await uploadResponse.json();
@@ -410,6 +433,8 @@
       } catch (error) {
         console.error('Upload error:', error);
         statusText.textContent = `Upload failed: ${error.message}`;
+      } finally {
+        uploadBtn.disabled = false;
       }
     };
   </script>
